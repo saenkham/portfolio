@@ -119,21 +119,35 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
 .sec-head p{margin:0;color:var(--ink-soft)}
 
 /* Experience: timeline selector */
-.timeline{overflow:hidden;border:1px solid var(--line);border-radius:.5rem;background:#fff}
-.tl-row{display:block;width:100%;padding:1rem 1rem 1.1rem;border:0;border-left:4px solid transparent;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
-.tl-row+.tl-row{border-top:1px solid var(--line)}
-.tl-row:hover{background:var(--mist)}
-.tl-row[aria-selected="true"]{background:var(--mist);border-left-color:var(--role)}
-.tl-top{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem 1rem}
+.tl-hint{display:none;margin:0 0 .75rem;color:var(--pine-900);font-size:1rem}
+.js .tl-hint{display:block}
+.timeline{overflow:visible}
+[role="tablist"]{display:grid;gap:.75rem}
+.tl-row{display:block;width:100%;padding:1rem 1rem 1.1rem 1.4rem;border:2px solid var(--line);border-radius:.5rem;background:#fff;box-shadow:inset 6px 0 0 var(--role),0 1px 2px rgba(10,59,58,.08);color:inherit;font:inherit;text-align:left;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s,background-color .15s}
+.tl-row:hover{border-color:var(--role);background:var(--mist);box-shadow:inset 6px 0 0 var(--role),0 4px 12px rgba(10,59,58,.14);transform:translateY(-1px)}
+.tl-row[aria-selected="true"]{background:var(--mist);border-color:var(--role);box-shadow:inset 6px 0 0 var(--role),0 4px 12px rgba(10,59,58,.14);transform:none}
+.tl-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem}
 .tl-title{font:500 1.25rem var(--serif)}
+.tl-side{display:inline-flex;align-items:center;gap:.9rem}
 .tl-years{color:var(--ink-soft);font-size:.9375rem;font-variant-numeric:tabular-nums}
+.tl-cta{display:none;align-items:center;gap:.4rem;min-height:2rem;padding:.2rem .8rem;border:2px solid var(--role);border-radius:999px;background:#fff;color:var(--role);font:600 .9375rem var(--sans);white-space:nowrap}
+.js .tl-cta{display:inline-flex}
+.tl-cta .ico{width:1rem;height:1rem;transition:transform .15s}
+.tl-row:hover .tl-cta .ico{transform:translateX(3px)}
+.cta-on{display:none}
+.tl-row[aria-selected="true"] .cta-on{display:inline}
+.tl-row[aria-selected="true"] .cta-off{display:none}
+.tl-row[aria-selected="true"] .tl-cta{background:#fff;color:var(--role)}
+.tl-row[aria-selected="true"] .tl-cta .ico{display:none}
+.tl-row:not([aria-selected="true"]) .tl-cta{background:var(--role);color:#fff}
 .tl-track{display:block;position:relative;height:.625rem;margin-top:.6rem;border-radius:2px;background:rgba(15,90,87,.1)}
 .tl-bar{position:absolute;top:0;bottom:0;left:var(--l);width:var(--w);border-radius:2px;background:var(--role);opacity:.45}
 .tl-row[aria-selected="true"] .tl-bar{opacity:1}
-.tl-axis{position:relative;height:1.9rem;margin:0 1rem 0 calc(1rem + 4px);border-top:1px solid var(--line)}
+.tl-axis{position:relative;height:1.9rem;margin:.5rem calc(1rem + 2px) 0 calc(1.4rem + 2px);border-top:1px solid var(--line)}
 .tl-axis span{position:absolute;top:.4rem;left:var(--x);transform:translateX(-50%);color:var(--ink-soft);font-size:.8125rem;font-variant-numeric:tabular-nums}
 .role-lab{--role:var(--pine-700)}
 .role-gf{--role:var(--giemsa)}
+@media (prefers-reduced-motion:reduce){.tl-row,.tl-cta .ico{transition:none}.tl-row:hover{transform:none}.tl-row:hover .tl-cta .ico{transform:none}}
 
 /* Experience: focus filter */
 .filters{display:none;flex-wrap:wrap;align-items:center;gap:.5rem;margin:1.75rem 0 .5rem}
@@ -155,6 +169,25 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
 .grp li::before{content:"";position:absolute;left:0;top:.62em;width:.4rem;height:.4rem;border-radius:50%;background:var(--role)}
 .empty{margin:0;padding:1rem 1.25rem;border-left:4px solid var(--role);background:var(--mist)}
 .linkbtn{padding:0;border:0;background:none;color:var(--pine-700);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:.2em;cursor:pointer}
+
+.groups.flow{display:block;column-count:2;column-gap:clamp(2rem,5vw,4rem)}
+.groups.flow .grp{break-inside:avoid;margin-bottom:2rem}
+@media (max-width:860px){.groups.flow{column-count:1}}
+.grp li strong{color:var(--pine-900);font-weight:600}
+.grp .sub+.sub{margin-top:1.1rem}
+.grp h5{margin:0 0 .5rem;color:var(--role);font:600 .8125rem var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.numbers table{width:100%;border-collapse:collapse;font-size:1rem}
+.numbers thead th{padding:.4rem 0;border-bottom:1px solid var(--line);color:var(--ink-soft);font:600 .8125rem var(--sans);letter-spacing:.06em;text-transform:uppercase;text-align:left}
+.numbers thead th:last-child,.numbers td{text-align:right}
+.numbers tbody th{padding:.55rem 1rem .55rem 0;border-bottom:1px solid var(--line);font-weight:400;text-align:left}
+.numbers td{padding:.55rem 0;border-bottom:1px solid var(--line);color:var(--role);font:500 1.5rem/1.1 var(--serif);font-variant-numeric:tabular-nums;white-space:nowrap}
+.next-role{display:none;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+.js .next-role{display:block}
+.btn-next{display:inline-flex;align-items:center;gap:.6rem;min-height:2.75rem;padding:.6rem 1.25rem;border:2px solid var(--role);border-radius:.375rem;background:var(--role);color:#fff;font:600 1rem var(--sans);cursor:pointer}
+.btn-next:hover{background:#fff;color:var(--role)}
+.btn-next .ico{transition:transform .15s}
+.btn-next:hover .ico{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){.btn-next .ico{transition:none}.btn-next:hover .ico{transform:none}}
 
 /* Digital tools */
 .tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem clamp(2rem,5vw,4rem);margin:0;padding:0;list-style:none}
@@ -234,7 +267,7 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
   .tick{animation:none;opacity:1}
 }
 @media print{
-  .nav,.filters,.status,.timeline,.actions,.field,.copy-btn,.zoom,.topo{display:none!important}
+  .nav,.filters,.status,.timeline,.tl-hint,.next-role,.actions,.field,.copy-btn,.zoom,.topo{display:none!important}
   .hero,.contact{background:#fff!important;color:#000!important}
   .hero *,.contact *{color:#000!important}
   [role="tabpanel"][hidden]{display:block!important}
@@ -243,7 +276,7 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-micro" viewBox="0 0 24 24"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 8v6M9 11h6"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-clipplus" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11v6M9 14h6"/></symbol><symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2.7s6 6.3 6 10.8a6 6 0 0 1-12 0C6 9 12 2.7 12 2.7z"/></symbol><symbol id="i-report" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 17v-3M12 17v-6M16 17v-4"/></symbol><symbol id="i-hospital" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M12 9v5M9.5 11.5h5"/><path d="M10 21v-3h4v3"/></symbol><symbol id="i-case" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 11v6M9 14h6"/></symbol><symbol id="i-steth" viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/><path d="M22 10v6"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M12 6.5v5M9.5 9h5"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-tube" viewBox="0 0 24 24"><path d="M14.5 2v17.5a2.5 2.5 0 0 1-5 0V2"/><path d="M8.5 2h7"/><path d="M14.5 16h-5"/></symbol><symbol id="i-clipcheck" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol><symbol id="i-pill" viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7z"/><path d="m8.5 8.5 7 7"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol><symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol><symbol id="i-micro" viewBox="0 0 24 24"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="i-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 8v6M9 11h6"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-clipplus" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11v6M9 14h6"/></symbol><symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2.7s6 6.3 6 10.8a6 6 0 0 1-12 0C6 9 12 2.7 12 2.7z"/></symbol><symbol id="i-report" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 17v-3M12 17v-6M16 17v-4"/></symbol><symbol id="i-hospital" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M12 9v5M9.5 11.5h5"/><path d="M10 21v-3h4v3"/></symbol><symbol id="i-case" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M12 11v6M9 14h6"/></symbol><symbol id="i-steth" viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/><path d="M22 10v6"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M12 6.5v5M9.5 9h5"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-tube" viewBox="0 0 24 24"><path d="M14.5 2v17.5a2.5 2.5 0 0 1-5 0V2"/><path d="M8.5 2h7"/><path d="M14.5 16h-5"/></symbol><symbol id="i-clipcheck" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol><symbol id="i-pill" viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7z"/><path d="m8.5 8.5 7 7"/></symbol><symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol><symbol id="i-thermo" viewBox="0 0 24 24"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol></defs></svg>
 
 <nav class="nav" aria-label="Sections">
   <div class="wrap">
@@ -309,14 +342,15 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
       <p>Two roles at Malteser International on the Thai–Myanmar border. Select a role, then choose a focus to see only the work that matters to you.</p>
     </div>
 
+    <p class="tl-hint"><strong>2 roles.</strong> Click a role below to switch the details.</p>
     <div class="timeline">
       <div role="tablist" aria-label="Roles" aria-orientation="vertical">
         <button class="tl-row role-lab" role="tab" id="tab-lab" aria-controls="panel-lab" aria-selected="true">
-          <span class="tl-top"><span class="tl-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-micro"/></svg>Laboratory Supervisor</span><span class="tl-years">2005–2026</span></span>
+          <span class="tl-top"><span class="tl-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-micro"/></svg>Laboratory Supervisor</span><span class="tl-side"><span class="tl-years">2005–2026</span><span class="tl-cta" aria-hidden="true"><span class="cta-off">View details</span><span class="cta-on">Viewing</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span></span></span>
           <span class="tl-track" aria-hidden="true"><span class="tl-bar" style="--l:0%;--w:100%"></span></span>
         </button>
         <button class="tl-row role-gf" role="tab" id="tab-gf" aria-controls="panel-gf" aria-selected="false" tabindex="-1">
-          <span class="tl-top"><span class="tl-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg>Global Fund Focal Point</span><span class="tl-years">2021–2024</span></span>
+          <span class="tl-top"><span class="tl-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg>Global Fund Focal Point</span><span class="tl-side"><span class="tl-years">2021–2024</span><span class="tl-cta" aria-hidden="true"><span class="cta-off">View details</span><span class="cta-on">Viewing</span><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span></span></span>
           <span class="tl-track" aria-hidden="true"><span class="tl-bar" style="--l:76.19%;--w:14.29%"></span></span>
         </button>
       </div>
@@ -390,6 +424,7 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
           </ul>
         </div>
       </div>
+      <div class="next-role"><button type="button" class="btn-next role-gf" data-goto="panel-gf" data-scroll>Next role: Global Fund Focal Point<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></button></div>
       <p class="empty" hidden>Nothing in this role matches this focus. <button type="button" class="linkbtn" data-goto="panel-gf">See the other role</button></p>
     </div>
 
@@ -403,59 +438,107 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
           <span>Mae La Oon and Mae Ra Ma Luang shelters. Principal Recipient: Department of Disease Control, Ministry of Public Health</span>
         </div>
       </div>
-      <div class="groups">
-        <div class="grp">
-          <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg>Key achievements</h4>
-          <ul>
-            <li data-tags="program">Established structured malaria program systems that enabled a smooth transition to RAI4E.</li>
-            <li data-tags="program lab">Ensured timely diagnosis and treatment under the Thailand National Malaria Treatment Guidelines.</li>
-            <li data-tags="program">Prevented community outbreaks by proactively detecting asymptomatic cases.</li>
-            <li data-tags="program">Achieved comprehensive coverage with long-lasting insecticidal nets (LLIN) across both shelters.</li>
-          </ul>
-        </div>
-        <div class="grp">
-          <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipplus"/></svg>Program leadership and implementation, 2021–2023</h4>
-          <ul>
-            <li data-tags="program lead">Led full implementation of Global Fund malaria activities in line with national malaria guidelines.</li>
-            <li data-tags="program">Planned and managed activity-based budgets, including community-level HR.</li>
-            <li data-tags="program data">Monitored targets, timelines and performance indicators, coordinating directly with the sub-recipient (SR).</li>
-            <li data-tags="program data">Collaborated with a network of 98 Community-Based Workers to successfully deliver project outcomes.</li>
-          </ul>
-        </div>
-        <div class="grp">
-          <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-drop"/></svg>Core activities</h4>
-          <ul>
-            <li data-tags="lab program">Established and operated malaria posts for diagnosis and treatment (RDT and microscopy).</li>
-            <li data-tags="program">Ran proactive and reactive case detection in high-risk and index-case areas.</li>
-            <li data-tags="program lab">Set up a follow-up system so patients completed 4 blood tests within 90 days.</li>
-            <li data-tags="program">Conducted LLIN surveys and distributions and implemented focal indoor residual spraying (IRS).</li>
-            <li data-tags="training">Delivered malaria training and treatment guideline sessions for medics, CHWs, lab staff, MPWs and MOWs.</li>
-            <li data-tags="supply">Managed malaria commodity forecasting and stock: RDTs, LLINs, antimalarials, chemicals and supplies.</li>
-          </ul>
-        </div>
-        <div class="grp">
-          <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-report"/></svg>Reporting and data</h4>
-          <ul>
-            <li data-tags="data">Entered and managed malaria patient data in the national malaria database.</li>
-            <li data-tags="data program">Prepared comprehensive quarterly narrative reports for the SR, analyzing progress across targets and managing financial tracking for 30+ complex budget lines., Malaria Information System datasets (PR format), financial reports (expenditure, forecast, carry-over), and stock and commodity reports.</li>
-            <li data-tags="data program">Submitted monthly internal performance reports.</li>
-            <li data-tags="data digital">Developed and maintained an internal malaria dashboard with monthly updates.</li>
-            <li data-tags="data">Led monthly data validation, combining digital verification and tally checks.</li>
-            <li data-tags="lab program">Monitored cases and ran slide QC with the Vector Borne Disease Unit (VBDU) to keep treatment in line with national guidelines.</li>
-            <li data-tags="program">Passed regular SR audits and the external Global Fund audit review.</li>
-          </ul>
-        </div>
-        <div class="grp">
-          <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-hospital"/></svg>Representation and coordination</h4>
-          <ul>
-            <li data-tags="program">Represented the organization in provincial and district malaria review meetings.</li>
-            <li data-tags="program">Presented progress activities during meetings between SR, PR, and Thai stakeholders.</li>
-            <li data-tags="program">Coordinated with the SR, VBDU and shelter committees on surveillance, IRS and outbreak prevention.</li>
-            <li data-tags="program">Prepared program documentation and site visits for donor and partner monitoring.</li>
-            <li data-tags="data supply">Gave the SR early malaria trend alerts and medicine forecasts.</li>
-          </ul>
-        </div>
+      <div class="groups flow">
+          <div class="grp">
+            <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg>Key achievements</h4>
+            <ul>
+              <li data-tags="program"><strong>Program systems:</strong> Established structured malaria program systems that enabled a smooth transition to RAI4E.</li>
+              <li data-tags="program lab"><strong>Timely care:</strong> Ensured timely diagnosis and treatment in accordance with the Thailand National Malaria Treatment Guidelines.</li>
+              <li data-tags="program"><strong>Outbreak prevention:</strong> Prevented community outbreaks by proactively detecting asymptomatic cases.</li>
+              <li data-tags="program"><strong>Vector control coverage:</strong> Achieved comprehensive long-lasting insecticidal net (LLIN) coverage across both shelters.</li>
+            </ul>
+          </div>
+          <div class="grp numbers" data-show="all program">
+            <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pulse"/></svg>By the numbers</h4>
+            <table>
+              <thead><tr><th scope="col">Metric</th><th scope="col">Result</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Population covered</th><td>20,000+</td></tr>
+                <tr><th scope="row">People tested (RDT and microscopy)</th><td>30,000+</td></tr>
+                <tr><th scope="row">People treated</th><td>1,400+</td></tr>
+                <tr><th scope="row">LLINs distributed</th><td>13,000+</td></tr>
+                <tr><th scope="row">Community-Based Workers coordinated</th><td>98</td></tr>
+                <tr><th scope="row">Budget lines managed</th><td>20+</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="grp">
+            <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipplus"/></svg>Program leadership and implementation</h4>
+            <ul>
+              <li data-tags="program lead">Led the full implementation of Global Fund malaria activities, aligned with national guidelines.</li>
+              <li data-tags="program">Planned and managed activity-based budgets, including community-level human resources.</li>
+              <li data-tags="program data">Monitored targets, timelines and performance indicators in direct coordination with the SR.</li>
+              <li data-tags="program data">Collaborated with a network of 98 Community-Based Workers to deliver project outcomes.</li>
+            </ul>
+          </div>
+          <div class="grp">
+            <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-drop"/></svg>Core activities</h4>
+            <div class="sub">
+              <h5>Diagnosis and treatment</h5>
+              <ul>
+                <li data-tags="lab program">Established and operated malaria posts offering RDT and microscopy diagnosis and treatment.</li>
+                <li data-tags="program">Ran proactive and reactive case detection in high-risk and index-case areas.</li>
+                <li data-tags="program lab">Set up a follow-up system so patients completed four blood tests within 90 days.</li>
+              </ul>
+            </div>
+            <div class="sub">
+              <h5>Vector control</h5>
+              <ul>
+                <li data-tags="program">Conducted LLIN surveys and distributed more than 13,000 LLINs.</li>
+                <li data-tags="program">Implemented focal indoor residual spraying (IRS).</li>
+              </ul>
+            </div>
+            <div class="sub">
+              <h5>Capacity building and community engagement</h5>
+              <ul>
+                <li data-tags="training">Delivered malaria and treatment guideline training for medics, CHWs, lab staff, MPWs and MOWs.</li>
+                <li data-tags="training program">Conducted IEC/BCC campaigns to promote LLIN use and health awareness.</li>
+              </ul>
+            </div>
+            <div class="sub">
+              <h5>Supply chain</h5>
+              <ul>
+                <li data-tags="supply">Managed commodity forecasting and stock for RDTs, LLINs, antimalarials, chemicals and supplies.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="grp">
+            <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-report"/></svg>Reporting and data management</h4>
+            <ul>
+              <li data-tags="data">Entered and managed patient data in the national malaria database.</li>
+              <li data-tags="data program">Prepared quarterly narrative reports for the SR, analyzing progress against targets and tracking finances across 20+ complex budget lines.</li>
+              <li data-tags="data program">Produced Malaria Information System datasets (PR format), financial reports (expenditure, forecast, carry-over), and stock and commodity reports.</li>
+              <li data-tags="data program">Submitted monthly internal performance reports.</li>
+              <li data-tags="data digital">Developed and maintained an internal malaria dashboard, updated monthly.</li>
+              <li data-tags="data">Led monthly data validation, combining digital verification with tally checks.</li>
+              <li data-tags="lab program">Monitored cases and ran slide quality control with the Vector Borne Disease Unit (VBDU) to keep treatment aligned with national guidelines.</li>
+              <li data-tags="program">Passed regular SR audits and the external Global Fund audit review.</li>
+            </ul>
+          </div>
+          <div class="grp">
+            <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-box"/></svg>Financial management and procurement</h4>
+            <ul>
+              <li data-tags="program data">Prepared yearly budgets and tracked expenditure quarterly.</li>
+              <li data-tags="program data">Produced budget forecasts and managed carry-over.</li>
+              <li data-tags="program data">Wrote justifications for budget over- and underspends.</li>
+              <li data-tags="program">Handled budget modifications.</li>
+              <li data-tags="program supply">Prepared quarterly procurement lists for health and non-health products.</li>
+              <li data-tags="program supply">Participated in quotation selection.</li>
+              <li data-tags="supply">Served as malaria program stock controller for health and non-health products and equipment.</li>
+            </ul>
+          </div>
+          <div class="grp">
+            <h4><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-hospital"/></svg>Representation and coordination</h4>
+            <ul>
+              <li data-tags="program">Represented the organization at provincial and district malaria review meetings.</li>
+              <li data-tags="program">Presented progress updates at meetings between the SR, PR and Thai stakeholders.</li>
+              <li data-tags="program">Coordinated with the SR, VBDU and shelter committees on surveillance, IRS and outbreak prevention.</li>
+              <li data-tags="program">Prepared program documentation and hosted site visits for donor and partner monitoring.</li>
+              <li data-tags="data supply">Gave the SR early alerts on malaria trends and medicine forecasts.</li>
+            </ul>
+          </div>
       </div>
+      <div class="next-role"><button type="button" class="btn-next role-lab" data-goto="panel-lab" data-scroll>Next role: Laboratory Supervisor<svg class="ico" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></button></div>
       <p class="empty" hidden>Nothing in this role matches this focus. <button type="button" class="linkbtn" data-goto="panel-lab">See the other role</button></p>
     </div>
   </div>
@@ -700,11 +783,19 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
     panels.forEach(function (p) {
       var inPanel = 0;
       [].forEach.call(p.querySelectorAll('.grp'), function (g) {
+        var show = g.getAttribute('data-show');
+        if (show) {
+          g.hidden = show.split(' ').indexOf(focus) === -1;
+          return;
+        }
         var visible = 0;
         [].forEach.call(g.querySelectorAll('li'), function (li) {
           var on = focus === 'all' || hasTag(li, focus);
           li.hidden = !on;
           if (on) visible++;
+        });
+        [].forEach.call(g.querySelectorAll('.sub'), function (s) {
+          s.hidden = s.querySelectorAll('li:not([hidden])').length === 0;
         });
         g.hidden = visible === 0;
         inPanel += visible;
@@ -748,7 +839,11 @@ h2{margin:0 0 .75rem;font:500 clamp(1.9rem,1.4rem + 2vw,2.75rem)/1.1 var(--serif
   });
 
   [].forEach.call(document.querySelectorAll('[data-goto]'), function (b) {
-    b.addEventListener('click', function () { selectRole(b.getAttribute('data-goto')); });
+    b.addEventListener('click', function () {
+      var scroll = b.hasAttribute('data-scroll');
+      selectRole(b.getAttribute('data-goto'), scroll);
+      if (scroll) document.querySelector('.timeline').scrollIntoView({ block: 'start' });
+    });
   });
 
   selectRole('panel-lab');
